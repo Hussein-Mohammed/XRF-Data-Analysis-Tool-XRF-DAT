@@ -1,0 +1,364 @@
+﻿@page
+@model XRF_Data_Analysis.Pages.SettingsModel
+@inject XRF_Data_Analysis.Headers.XRF_Tables_Uploaded XRF_Tables
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h3 style="text-align:center">@ViewData["Title"]</h3>
+<hr />
+
+<h4 style="text-align:center; font-style:italic">Settings of Tables Processing</h4>
+<hr />
+<form method="post" asp-page-handler="SettingsTables">
+    <div class="form-group" id="SettingsTables">
+
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Filter measurements using Chi:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="Chi_Value_Tables" name="Chi_Value" max="1000" min="0.1" step="0.1" type="number" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Chi_Filter_Tables" name="Chi_Filter" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Subtract support measurements:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Sub_Support_Tables" name="Sub_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average non-support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Ink_Tables" name="Avg_Ink" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Support_Tables" name="Avg_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="Remove_Zero_Net" style="font-size:medium">Keep only elements with Net larger than zero:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Remove_Zero_Net_Tables" name="Remove_Zero_Net" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Normalise measurements by:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="NormaliseBy_Tables" name="NormaliseBy" type="text" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Normalise_Tables" name="Normalise" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Include only this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Include_Tables" name="Min_Energy_Include" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Include_Tables" name="Max_Energy_Include" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Include_Tables" name="Energy_Filter_Include" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Exclude this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Exclude_Tables" name="Min_Energy_Exclude" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Exclude_Tables" name="Max_Energy_Exclude" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Exclude_Tables" name="Energy_Filter_Exclude" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <h1 style="text-align:center"><button type="submit" class="btn btn-primary"> Process XRF tables and download results </button></h1>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<h4 style="text-align:center; font-style:italic">Settings of Table Generation for Scatter Plots</h4>
+<hr />
+
+<form method="post" asp-page-handler="SettingsScatter">
+    <div class="form-group" id="SettingsScatter">
+
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Filter measurements using Chi:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="Chi_Value_Scatter" name="Chi_Value" max="1000" min="0.1" step="0.1" type="number" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Chi_Filter_Scatter" name="Chi_Filter" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Subtract support measurements:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Sub_Support_Scatter" name="Sub_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average non-support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Ink_Scatter" name="Avg_Ink" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Support_Scatter" name="Avg_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Normalise measurements by:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="NormaliseBy_Scatter" name="NormaliseBy" type="text" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Normalise_Scatter" name="Normalise" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Include only this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Include_Scatter" name="Min_Energy_Include" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Include_Scatter" name="Max_Energy_Include" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Include_Scatter" name="Energy_Filter_Include" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Exclude this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Exclude_Scatter" name="Min_Energy_Exclude" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Exclude_Scatter" name="Max_Energy_Exclude" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Exclude_Scatter" name="Energy_Filter_Exclude" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <h1 style="text-align:center"><button type="submit" class="btn btn-primary"> Generate table for scatter plots and download result </button></h1>
+            </div>
+        </div>
+
+    </div>
+</form>
+<hr />
+<h4 style="text-align:center; font-style:italic">Settings of Distances Calculation</h4>
+<hr />
+
+<form method="post" asp-page-handler="SettingsNLNBNN">
+    <div class="form-group" id="SettingsNLNBNN">
+
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Filter measurements using Chi:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="Chi_Value_Similarity" name="Chi_Value" max="1000" min="0.1" step="0.1" type="number" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Chi_Filter_Similarity" name="Chi_Filter" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Subtract support measurements:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Sub_Support_Similarity" name="Sub_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average non-support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Ink_Similarity" name="Avg_Ink" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Average support measurements from same folio and source:</label>
+            </div>
+            <div class="col-sm-7">
+                <input asp-for="Avg_Support_Similarity" name="Avg_Support" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="HSName_Post" style="font-size:medium">Normalise measurements by:</label>
+            </div>
+            <div class="col-sm-5">
+                <input asp-for="NormaliseBy_Similarity" name="NormaliseBy" type="text" style="width: 50%">
+            </div>
+            <div class="col-sm-2">
+                <input asp-for="Normalise_Similarity" name="Normalise" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Include only this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Include_Similarity" name="Min_Energy_Include" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Include_Similarity" name="Max_Energy_Include" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Include_Similarity" name="Energy_Filter_Include" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <label for="HSName_Post" style="font-size:medium">Exclude this energy range:</label>
+            </div>
+            <div class="col-3">
+                <label for="Min">Minimum energy in KeV</label>
+                <input asp-for="Min_Energy_Exclude_Similarity" name="Min_Energy_Exclude" id="Min" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-3">
+                <label for="Max">Maximum energy in KeV</label>
+                <input asp-for="Max_Energy_Exclude_Similarity" name="Max_Energy_Exclude" id="Max" max="100" min="0.11" step="0.01" type="number" style="width: 90%">
+            </div>
+            <div class="col-1">
+                <input asp-for="Energy_Filter_Exclude_Similarity" name="Energy_Filter_Exclude" style="transform:scale(3)">
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            @if (XRF_Tables.All_XRF_Tables.Count() > 0)
+            {
+                <div class="col-12">
+                    <h1 style="text-align:center"><button type="submit" class="btn btn-primary"> Calculate distances and download results </button></h1>
+                </div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <h1 style="text-align:center"><button type="submit" class="btn btn-primary" disabled> Calculate distances and download results </button></h1>
+                </div>
+            }
+        </div>
+
+    </div>
+</form>
+
+<hr />
+<div class="row">
+    <div class="col-12">
+        <h1 style="text-align:center"><a asp-page="/Index"> <button class="btn btn-primary">Start New Analysis</button> </a> </h1>
+    </div>
+</div>
+<hr />
+<div style="border-style:solid; border-color:blue; border-width:medium; border-radius:10px; padding:3px">
+    <h3 style="text-align:center">Guidelines:</h3>
+    <ol>
+        <li>
+            You can choose different settings for each of the three possible tasks.
+        </li>
+        <li>
+            Once you click the button of a certain task, the corresponding settings will be applied and the results will be
+            downloaded.
+        </li>
+        <li>
+            You can keep changing the settings and downloading new results as many times as you like.
+        </li>
+        <li>
+            The textual input in the settings is case insensitive; Therefore, you don't need to worry about upper and lower cases.
+        </li>
+        <li>
+            Regardless of the user input, the minimum and maximum energy will be bounded by 0.11 KeV and 100 KeV.
+        </li>
+        <li>
+            If the user used undefined normalisation factor, the normalisation value will be set to 1. Valid normalisation factors are the symbol of any element or the word "total".
+        </li>
+        <li>
+            If the normalisation factor happens to be zero, the result will be Not a Number (NaN). If the Net value to be normalised is zero, the result will be zero.
+        </li>
+        <li>
+            Distances between different measurements are calculated using the Euclidean distance (L2) between the Net-based feature vectors of each measurement after
+            applying the corresponding settings. The Net-based feature vectors are constracted from the Net values; Furthermore, they are normalised and resized to have equal lengths.  
+        </li>
+    </ol>
+</div>

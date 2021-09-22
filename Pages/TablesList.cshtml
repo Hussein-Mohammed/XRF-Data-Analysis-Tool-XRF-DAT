@@ -1,0 +1,78 @@
+﻿@page
+@model XRF_Data_Analysis.Pages.TablesListModel
+@inject XRF_Data_Analysis.Headers.XRF_Tables_Uploaded XRF_Tables
+@{
+    ViewData["Title"] = "Measurements List";
+    var Tables_Merged = XRF_Tables.XRF_Tables_Avg_Measurement;
+    var Tables_All = XRF_Tables.All_XRF_Tables;
+}
+
+<h3 style="text-align:center; font-style:italic">@ViewData["Title"]</h3>
+
+<br />
+<hr />
+@{
+    if (Tables_All != null && Tables_All.Count() > 0)
+    {
+        <div style="text-align:center">
+            Uploaded Measurements: @Tables_All.Count()
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align:center">
+                        Uploaded Measurements
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var table in Tables_All)
+            {
+                <tr>
+                    <th style="text-align:center">
+                        <p style="text-align:center">Folio: @table.Folio , Source: @table.Source, Measurement: @table.Measurement</p>
+                    </th>
+                    <th style="text-align:center">
+                        <form method="post" asp-page-handler="DeleteTable">
+                            <button class="btn btn-primary" asp-page-handler="DeleteTable">Delete</button>
+                            <input type="hidden" name="FS" value="@table.Folio_Source_Measurement" />
+                        </form>
+                    </th>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h4 style="color:crimson"> No valid files uploaded yet! Please check the instructions in the upload page.</h4>
+    }
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1 style="text-align:center"><a asp-page="/Index"> <button class="btn btn-primary">Back</button> </a> </h1>
+    </div>
+    @{
+        if (Tables_All.Count() > 0)
+        {
+            <div class="col-md-6">
+                <h1 style="text-align:center"><a asp-page="/Settings"> <button class="btn btn-primary">Next</button> </a> </h1>
+            </div>
+        }
+    }
+</div>
+
+<hr />
+<div style="border-style:solid; border-color:blue; border-width:medium; border-radius:10px; padding:3px">
+    <h3 style="text-align:center">Guidelines:</h3>
+    <ol>
+        <li>
+            Check the list of measurements and validate whether the extracted Folio and Source  of each table are correct.
+        </li>
+        <li>
+            The number of measurements corresponds to the number of valid files only. Any invalid file will be ignored by the application.
+        </li>
+        <li>
+            You can delete any measurement by simply clicking the "Delete" button.
+        </li>
+    </ol>
+</div>
